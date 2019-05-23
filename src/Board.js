@@ -41,7 +41,7 @@ class Board extends Component {
 
     // Update the state when a Note was edited.
     update(newText, i) {
-        console.log('updating item at index', i, newText);
+        console.log('updating item with id', i, newText);
         this.setState(prevState => ({
             notes: prevState.notes.map(
                 note => (note.id !== i) ? note : {...note, note: newText}
@@ -51,7 +51,7 @@ class Board extends Component {
 
     // Update the state when a Note was deleted.
     remove(id) {
-        console.log('removing item at', id);
+        console.log('removing item with id', id);
         this.setState(prevState => ({
             notes: prevState.notes.filter( note => note.id !== id )
         }));
