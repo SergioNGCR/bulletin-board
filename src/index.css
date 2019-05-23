@@ -33,14 +33,14 @@ div.note {
     width: 150px;
     background-color: rgb(238, 222, 0);
     margin: 2px 0;
-    position: relative;
-    cursor: -webkit-grab;
+    position: absolute;
+    /* cursor: -webkit-grab; */
     -webkit-box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
     box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
 }
 
 div.note:active {
-    cursor: -webkit-grabbing;
+    /* cursor: -webkit-grabbing; */
 }
 
 div.note p {
@@ -76,9 +76,19 @@ div.board button {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
 }
 
+#loadingComp {
+  position: absolute;
+  right: calc(50% - 50px);
+  top: calc(50% - 50px);
+}
+
 #add {
-  background-color: #579257;
+  background-color: #2cb32c;
   height: 3em;
+  width: 3.2em;
+  margin-left: 10px;
+  margin-top: 10px;
+  text-align: center;
 }
 
 #edit {
@@ -86,7 +96,7 @@ div.board button {
 }
 
 #save {
-  background-color: #579257;
+  background-color: #2cb32c;
 }
 
 #remove {
