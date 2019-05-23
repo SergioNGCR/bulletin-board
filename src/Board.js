@@ -59,8 +59,12 @@ class Board extends Component {
         );
     }
 
+    componentWillMount() {
+        console.log('The Board will mount');
+    }
+  
     componentDidMount() {
-        console.log('The Board did mount');
+        console.log('The Board has just mounted');
     }
   
     componentWillUnmount() {

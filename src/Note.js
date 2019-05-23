@@ -35,8 +35,12 @@ class Note extends Component {
         });
     }
 
+    componentWillMount() {
+        console.log(`The Note ${this.props.children} will mount`);
+    }
+  
     componentDidMount() {
-        console.log(`The Note ${this.props.children} did mount`);
+        console.log(`The Note ${this.props.children} has just mounted`);
     }
   
     componentWillUnmount() {
