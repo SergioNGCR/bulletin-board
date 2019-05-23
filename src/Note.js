@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FaEdit, FaTrash, FaSave } from 'react-icons/fa';
 
 class Note extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             editing: false
@@ -22,19 +22,33 @@ class Note extends Component {
     }
 
     remove() {
-        alert('removing note');
+        //alert('removing note');
+        this.props.onRemove(this.props.index);
     }
 
-    save() {
-        alert(this._newText.value);
+    save(e) {
+        //alert(this._newText.value);
+        e.preventDefault();
+        this.props.onChange(this._newText.value, this.props.index);
+        this.setState({
+            editing: false
+        });
+    }
+
+    componentDidMount() {
+        console.log(`The Note ${this.props.children} did mount`);
+    }
+  
+    componentWillUnmount() {
+        console.log(`The Note ${this.props.children} will unmount`);
     }
 
     renderForm() {
         return (
             <div className="note">
-                <form>
+                <form onSubmit={this.save}>
                     <textarea ref={ input => this._newText = input } />
-                    <button onClick={this.save}><FaSave /></button>
+                    <button id="save"><FaSave /></button>
                 </form>
             </div>
         );
@@ -52,13 +66,8 @@ class Note extends Component {
         );
     }
 
-    render () {
+    render() {
         return this.state.editing ? this.renderForm() : this.renderDisplay();
-        /* if (this.state.editing){
-            return this.renderForm();
-        } else {
-            return this.renderDisplay();
-        } */
     }
 }
 

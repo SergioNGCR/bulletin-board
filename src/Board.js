@@ -1,40 +1,79 @@
 import React, { Component } from 'react';
+import { FaPlus } from 'react-icons/fa';
 import Note from './Note';
 
 class Board extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
-            notes: [
-                {
-                    id: 33,
-                    note: "Call Lisa"
-                },
-                {
-                    id: 34,
-                    note: "Email John"
-                },
-                {
-                    id: 35,
-                    note: "Order printer ink"
-                }
-            ]
+            notes: []
         }
         this.eachNote = this.eachNote.bind(this);
+        this.update = this.update.bind(this);
+        this.remove = this.remove.bind(this);
+        this.add = this.add.bind(this);
+        this.nextId = this.nextId.bind(this);
     }
 
-    eachNote (note, i) {
+    add(text) {
+        this.setState(prevState => ({
+            notes: [
+                ...prevState.notes, 
+                { 
+                    id: this.nextId(),
+                    note: text 
+                }
+            ]
+        }));
+    }
+
+    nextId() {
+        this.uniqueId = this.uniqueId || 0;
+        return this.uniqueId++;
+    }
+
+    update(newText, i) {
+        console.log('updating item at index', i, newText);
+        this.setState(prevState => ({
+            notes: prevState.notes.map(
+                note => (note.id !== i) ? note : {...note, note: newText}
+            )
+        }));
+    }
+
+    remove(id) {
+        console.log('removing item at', id);
+        this.setState(prevState => ({
+            notes: prevState.notes.filter( note => note.id !== id )
+        }));
+    }
+
+    eachNote(note) {
+        console.log(note.note, "has an id of", note.id);
         return (
-            <Note key={i} index={i}>
+            <Note key={note.id} index={note.id} 
+                onChange={this.update}
+                onRemove={this.remove}>
                 {note.note}
             </Note>
         );
     }
 
-    render () {
+    componentDidMount() {
+        console.log('The Board did mount');
+    }
+  
+    componentWillUnmount() {
+        console.log('The Board will unmount');
+    }
+
+    render() {
         return (
             <div className="board" >
                 {this.state.notes.map(this.eachNote)}
+                <button onClick={this.add.bind(null, "New Note")} id="add">
+                    <FaPlus />
+                </button>
             </div>
         );
     }
