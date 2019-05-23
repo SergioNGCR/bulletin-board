@@ -41,7 +41,7 @@ class Board extends Component {
 
     // Update the state when a Note was edited.
     update(newText, i) {
-        console.log('updating item with id', i, newText);
+        console.log(`updating item with id ${i} | new text is "${newText}"`);
         this.setState(prevState => ({
             notes: prevState.notes.map(
                 note => (note.id !== i) ? note : {...note, note: newText}
